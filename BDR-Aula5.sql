@@ -54,7 +54,6 @@ CREATE TABLE Relato (
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 );
 
--- Tabela para alertas gerados pelo sistema
 CREATE TABLE Alerta (
     idAlerta INT PRIMARY KEY AUTO_INCREMENT,
     mensagem TEXT,

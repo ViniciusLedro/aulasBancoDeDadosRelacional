@@ -1,17 +1,11 @@
-DROP DATABASE IF EXISTS clima_alerta;
-
-CREATE DATABASE clima_alerta;
-
-USE clima_alerta;
-
 CREATE TABLE TipoEvento (
-    idTipoEvento INT PRIMARY KEY AUTO_INCREMENT,
+    idTipoEvento SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     descricao VARCHAR(255)
 );
 
 CREATE TABLE Localizacao (
-    idLocalizacao INT PRIMARY KEY AUTO_INCREMENT,
+    idLocalizacao SERIAL PRIMARY KEY,
     latitude FLOAT,
     longitude FLOAT,
     cidade VARCHAR(100),
@@ -19,12 +13,12 @@ CREATE TABLE Localizacao (
 );
 
 CREATE TABLE CategoriaUsuario (
-    idCategoria INT PRIMARY KEY AUTO_INCREMENT,
+    idCategoria SERIAL PRIMARY KEY,
     nome VARCHAR(50) 
 );
 
 CREATE TABLE Usuario (
-    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    idUsuario SERIAL PRIMARY KEY,
     nome VARCHAR(150),
     email VARCHAR(150) UNIQUE,
     senhaHash VARCHAR(255),
@@ -33,10 +27,10 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Evento (
-    idEvento INT PRIMARY KEY AUTO_INCREMENT,
+    idEvento SERIAL PRIMARY KEY,
     titulo VARCHAR(255),
     descricao TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     status VARCHAR(50), 
     idTipoEvento INT,
     idLocalizacao INT,
@@ -45,9 +39,9 @@ CREATE TABLE Evento (
 );
 
 CREATE TABLE Relato (
-    idRelato INT PRIMARY KEY AUTO_INCREMENT,
+    idRelato SERIAL PRIMARY KEY,
     texto TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     idEvento INT,
     idUsuario INT,
     FOREIGN KEY (idEvento) REFERENCES Evento(idEvento),
@@ -55,9 +49,9 @@ CREATE TABLE Relato (
 );
 
 CREATE TABLE Alerta (
-    idAlerta INT PRIMARY KEY AUTO_INCREMENT,
+    idAlerta SERIAL PRIMARY KEY,
     mensagem TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     nivel VARCHAR(50),
     idEvento INT,
     FOREIGN KEY (idEvento) REFERENCES Evento(idEvento)
@@ -94,10 +88,8 @@ SELECT titulo, dataHora, status FROM Evento;
 
 SELECT titulo, descricao, cidade, estado
 FROM Evento
-JOIN Localizacao ON Evento.idLocalizacao = Localizacao.idLocalizacao
 WHERE status = 'Ativo';
 
 SELECT Usuario.nome, Usuario.email, CategoriaUsuario.nome AS categoria
 FROM Usuario
-JOIN CategoriaUsuario ON Usuario.idCategoria = CategoriaUsuario.idCategoria
 WHERE CategoriaUsuario.nome = 'Cidadão';

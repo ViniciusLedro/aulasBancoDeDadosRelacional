@@ -1,33 +1,38 @@
 CREATE DATABASE clima_alerta;
 
-USE clima_alerta;
-
 CREATE TABLE TipoEvento (
-    idTipoEvento INT PRIMARY KEY,
+    idTipoEvento SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     descricao VARCHAR(255)
 );
 
 CREATE TABLE Localizacao (
-    idLocalizacao INT PRIMARY KEY,
+    idLocalizacao SERIAL PRIMARY KEY,
     latitude FLOAT,
     longitude FLOAT,
     cidade VARCHAR(100),
     estado VARCHAR(2)
 );
 
+CREATE TABLE CategoriaUsuario (
+    idCategoria SERIAL PRIMARY KEY,
+    nome VARCHAR(50) 
+);
+
 CREATE TABLE Usuario (
-    idUsuario INT PRIMARY KEY,
+    idUsuario SERIAL PRIMARY KEY,
     nome VARCHAR(150),
-    email VARCHAR(150),
-    senhaHash VARCHAR(255)
+    email VARCHAR(150) UNIQUE,
+    senhaHash VARCHAR(255),
+    idCategoria INT,
+    FOREIGN KEY (idCategoria) REFERENCES CategoriaUsuario(idCategoria)
 );
 
 CREATE TABLE Evento (
-    idEvento INT PRIMARY KEY,
+    idEvento SERIAL PRIMARY KEY,
     titulo VARCHAR(255),
     descricao TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     status VARCHAR(50), 
     idTipoEvento INT,
     idLocalizacao INT,
@@ -36,9 +41,9 @@ CREATE TABLE Evento (
 );
 
 CREATE TABLE Relato (
-    idRelato INT PRIMARY KEY,
+    idRelato SERIAL PRIMARY KEY,
     texto TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     idEvento INT,
     idUsuario INT,
     FOREIGN KEY (idEvento) REFERENCES Evento(idEvento),
@@ -46,16 +51,11 @@ CREATE TABLE Relato (
 );
 
 CREATE TABLE Alerta (
-    idAlerta INT PRIMARY KEY,
+    idAlerta SERIAL PRIMARY KEY,
     mensagem TEXT,
-    dataHora DATETIME,
+    dataHora TIMESTAMP,
     nivel VARCHAR(50),
     idEvento INT,
     FOREIGN KEY (idEvento) REFERENCES Evento(idEvento)
-);
-
-CREATE TABLE CategoriaUsuario (
-    idCategoria INT PRIMARY KEY,
-    nome VARCHAR(50) 
 );
 

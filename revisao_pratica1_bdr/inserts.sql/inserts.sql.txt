@@ -1,17 +1,17 @@
 INSERT INTO loja (nome, cidade) VALUES
-('GameWorld', 'São Paulo'),
-('PlayZone', 'Rio de Janeiro'),
-('NextLevel', 'Curitiba');
+('GameShop', 'São Paulo'),
+('Green Man Gaming', 'Rio de Janeiro'),
+('Nuuuvem', 'São Paulo');
 
 INSERT INTO cliente (nome, email, cidade) VALUES
-('Lucas Silva', 'lucas.silva@email.com', 'São Paulo'),
-('Ana Souza', 'ana.souza@email.com', 'Belo Horizonte'),
-('Carlos Lima', 'carlos.lima@email.com', 'Porto Alegre');
+('Vinicius Ledro', 'vinicius.ledro@gmail.com', 'Santa Branca'),
+('Eric Souza', 'eric.souza@gmail.com', 'São José dos Campos'),
+('Marcio Bueno', 'marcio.bueno@gmail.com', 'Jacareí');
 
 INSERT INTO jogo (titulo, ano_lancamento, genero) VALUES
-('CyberWarrior', 2021, 'Ação'),
-('Mystic Quest', 2019, 'RPG'),
-('SpeedX', 2023, 'Corrida');
+('Battlefield 6', 2025, 'Ação'),
+('Bomba Patch', 2025, 'Esporte'),
+('Squad', 2022, 'Ação');
 
 -- Compra 1
 INSERT INTO compra (data_compra, id_cliente, id_loja) VALUES

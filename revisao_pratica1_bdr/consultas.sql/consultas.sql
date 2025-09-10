@@ -6,4 +6,5 @@ FROM jogo
 WHERE ano_lancamento > 2020;
 
 SELECT SUM(quantidade) AS total_jogos_comprados
+
 FROM compra_jogo;

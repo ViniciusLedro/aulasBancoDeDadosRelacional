@@ -78,9 +78,9 @@ INSERT INTO venda (id_produto, id_loja, quantidade_venda, data_venda) VALUES
 
 --JOIN
 SELECT
-produto.nome_produto
-loja.nome_loja
-venda.quantidade_venda
+produto.nome_produto,
+loja.nome_loja,
+venda.quantidade_venda,
 FROM 
 venda 
 JOIN produto ON venda.id_produto = produto.id_produto 
@@ -88,7 +88,7 @@ JOIN loja ON venda.id_loja = loja.id_loja;
 
 --GROUP BY
 SELECT 
-loja.nome_loja
+loja.nome_loja,
 SUM(venda.quantidade_venda) AS total_vendido
 FROM venda
 JOIN loja ON venda.id_loja = loja.id_loja
@@ -96,7 +96,7 @@ GROUP BY loja.nome_loja;
 
 --HAVING
 SELECT
-loja.nome_loja
+loja.nome_loja,
 SUM(venda.quantidade_venda) AS total_vendido
 FROM venda 
 JOIN loja  ON venda.id_loja = loja.id_loja
@@ -114,3 +114,4 @@ fabricante.id_fabricante IN (
   FROM produto 
   JOIN venda ON produto.id_produto = venda.id_produto
 );
+
